@@ -1,8 +1,7 @@
 """
 home-credit-default-competition repository
 
-Functions for preprocessing and extracting features
-from application_train.csv and application_test.csv
+Functions for preprocessing and extracting features from application data.
 """
 
 import os
@@ -13,12 +12,13 @@ import utils
 import config
 
 
-
 def get_train_test(path, num_rows=None):
-    """Preprocess and extract features from application train and test.
+    """Preprocess and extract features from application train and test files.
 
-    Both files are combined in a single Dataframe for preprocessing,
-    aggregation and feature engineering. 
+    Both files are combined in a single Dataframe for preprocessing, aggregation
+    and feature engineering. This approach is NOT recommended on real-world models,
+    however it improves the score in this competition since we can consider
+    the test dataset features distribution.
 
     Arguments:
         path: Path to the folder where files are saved (string).
@@ -29,7 +29,7 @@ def get_train_test(path, num_rows=None):
     """
     train = pd.read_csv(os.path.join(path, 'application_train.csv'), nrows=num_rows)
     test = pd.read_csv(os.path.join(path, 'application_test.csv'), nrows=num_rows)
-    df = train.append(test)
+    df = train.append(test)  # check function notes
     del train, test
     gc.collect()
 
